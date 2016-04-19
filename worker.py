@@ -1,0 +1,26 @@
+# worker.py
+import time
+from celery import Celery, Task
+
+import requests
+
+class NotifierTask(Task):
+    """Task that sends notification on completion."""
+    abstract = True
+
+    def after_return(self, status, retval, task_id, args, kwargs, einfo):
+        url = 'http://localhost:3000/notify'
+        data = {'clientid': kwargs['clientid'], 'result': retval}
+        requests.post(url, data=data)
+        
+
+broker = 'amqp://localhost:5672'
+app = Celery(__name__, broker=broker)
+
+@app.task(base=NotifierTask)
+def mytask(clientid=None):
+     """Simulates some slow computation."""
+     time.sleep(10)
+     return 42
+
+# vim: set ai sw=4 ts=4 et sts=4
