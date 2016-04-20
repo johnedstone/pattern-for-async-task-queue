@@ -6,8 +6,6 @@ notifier:
   build: .
   dockerfile: Dockerfile.notifier
   command: ./run_nodejs.sh
-  volumes:
-    - .:/app:z
   ports:
     - "3000:3000"
 worker:
