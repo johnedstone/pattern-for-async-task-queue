@@ -7,4 +7,4 @@ Writing docker-compose.yml as was done [earlier](https://github.com/johnedstone/
 Notes:
   - How to run rabbitmq from the command line: ```docker run --publish=5672:5672 --detach rabbitmq:3.4```
   - How to use flask cli for debugging, although this only listens on 127.0.0.1 ```flask -a server --debug run```
-  - This can be run without docker or docker-compose, using virtualenv, running rabbitmq as described above, and running the services as described in the reference.  That is the config's are good as is, with or without docker
+  - This can be run without docker or docker-compose, using virtualenv, running rabbitmq as described above, and running the services as described in the reference.  That is, the config's are good as is, with or without docker
