@@ -9,7 +9,8 @@
     <br>
     Result: <span id="result"></span>
 
-    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
+    <script src="{{ notifier_url }}/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script>
         // http://stackoverflow.com/questions/14140414/websocket-interrupted-while-page-is-loading-on-firefox-for-socket-io
@@ -17,7 +18,8 @@
         $(function(){
 
             var resultElement = document.getElementById('result'),
-                client = io('http://localhost:3000'),
+                // client = io('http://localhost:3000'),
+                client = io('{{ notifier_url }}'),
                 clientid = null;
     
             client.on('register', function(id){

@@ -1,12 +1,17 @@
 # server.py
+from urllib.parse import urlparse
 from flask import Flask, render_template, request
+from config import NOTIFIER_PORT, NOTIFIER_HOST
 from worker import mytask
 
 app = Flask(__name__, template_folder='.')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    hostname = urlparse(request.url).hostname
+    # notifier_url = 'http://{}:{}'.format(hostname, NOTIFIER_PORT)
+    notifier_url = 'http://{}:{}'.format(NOTIFIER_HOST, NOTIFIER_PORT)
+    return render_template('index.html', notifier_url=notifier_url)
 
 @app.route('/runtask', methods=['POST'])
 def runtask():
